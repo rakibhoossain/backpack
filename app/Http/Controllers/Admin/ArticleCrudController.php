@@ -32,14 +32,25 @@ class ArticleCrudController extends CrudController
         // $this->crud->setFromDb();
         $this->crud->setColumns(['title', 'slug']);
         $this->crud->addColumn(['name' => 'image', 'type' => 'image', 'label' => 'Thumbnail']);
+        // $this->crud->addColumn([
+        //     'name' => 'tags', 
+        //     'attribute' => 'name', 
+        //     'type' => 'closure', 
+        //     'function' => function($entry) {
+        //         return $entry->tags->implode('name',', ');
+        //     }
+        // ]);        
+
         $this->crud->addColumn([
-            'name' => 'tags', 
-            'attribute' => 'name', 
-            'type' => 'closure', 
-            'function' => function($entry) {
-                return $entry->tags->implode('name',', ');
-            }
+            // n-n relationship (with pivot table)
+           'label' => "Tags", // Table column heading
+           'type' => "select_multiple",
+           'name' => 'tags', // the method that defines the relationship in your Model
+           'entity' => 'tags', // the method that defines the relationship in your Model
+           'attribute' => "name", // foreign key attribute that is shown to user
+           'model' => "App\Models\Tag", // foreign key model
         ]);
+
     }
 
     protected function setupCreateOperation()
