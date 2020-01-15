@@ -43,7 +43,7 @@ class Article extends Model
         // });
         //Image delete
         static::deleting(function($obj) {
-        \Storage::disk('public_folder')->delete($obj->image);
+        \Storage::disk(config('backpack.base.root_disk_name'))->delete($obj->image);
         });
     }
 

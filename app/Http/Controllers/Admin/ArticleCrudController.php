@@ -28,6 +28,8 @@ class ArticleCrudController extends CrudController
 
     protected function setupListOperation()
     {
+        $this->crud->enableExportButtons();
+        
         // TODO: remove setFromDb() and manually define Columns, maybe Filters
         // $this->crud->setFromDb();
         $this->crud->setColumns(['title', 'slug']);
